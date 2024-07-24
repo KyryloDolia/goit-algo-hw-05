@@ -25,8 +25,8 @@ def caching_fibonacci() -> Callable[[int], int]:
 def generator_numbers(text: str):
     pattern = r"[+-]?\d*\.\d+|\d+\.\d*|\d+"
     matches = re.findall(pattern, text)
-    for i in matches:
-        yield float(i)
+    for match in matches:
+        yield float(match)
     
 
 def sum_profit(text: str, func: Callable):
