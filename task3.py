@@ -29,7 +29,7 @@ def load_logs(file_path: str) -> list:
 def filter_logs_by_level(logs: list, level: str) -> list:
     filtered_logs = [log for log in logs if log['level'].lower() == level.lower()]
     if not filtered_logs:
-        print(f"\nНемає файлу з рівнем: '{level.upper()}'")
+        print(f"\nНемає логів з рівнем: '{level.upper()}'")
     return filtered_logs
 
 
