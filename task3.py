@@ -22,14 +22,14 @@ def load_logs(file_path: str) -> list:
                 logs.append(parse_log_line(line))
         return logs
     except FileNotFoundError:
-        print("File not found!")
+        print("Файл не знайдений")
         sys.exit()
 
 
 def filter_logs_by_level(logs: list, level: str) -> list:
     filtered_logs = [log for log in logs if log['level'].lower() == level.lower()]
     if not filtered_logs:
-        print(f"\nNo logs with level '{level.upper()}'")
+        print(f"\nНемає файлу з рівнем: '{level.upper()}'")
     return filtered_logs
 
 
