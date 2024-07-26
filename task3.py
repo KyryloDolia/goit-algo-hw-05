@@ -55,7 +55,7 @@ def main():
     log_file_extension = Path(log_file_path).suffix
 
     if log_file_extension != '.log':
-        print("Must be log file (.log)")
+        print("Має бути log файл (.log)")
         sys.exit()
 
     logs = load_logs(log_file_path)
