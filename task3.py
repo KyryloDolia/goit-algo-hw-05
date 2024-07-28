@@ -5,6 +5,9 @@ from collections import Counter
 
 def parse_log_line(line: str) -> dict:
     parts = line.split(' ', 3)
+    if len(parts) < 4:
+        print(f"Incorrect log line format: {line.strip()}")
+        return None
     return {
         'date': parts[0], 
         'time': parts[1], 
@@ -22,14 +25,15 @@ def load_logs(file_path: str) -> list:
                 logs.append(parse_log_line(line))
         return logs
     except FileNotFoundError:
-        print("Файл не знайдений")
+        print("File not found!")
         sys.exit()
 
 
 def filter_logs_by_level(logs: list, level: str) -> list:
     filtered_logs = [log for log in logs if log['level'].lower() == level.lower()]
+
     if not filtered_logs:
-        print(f"\nНемає логів з рівнем: '{level.upper()}'")
+        print(f"\nNo logs with level '{level.upper()}'")
     return filtered_logs
 
 
@@ -38,8 +42,9 @@ def count_logs_by_level(logs: list) -> dict:
 
 
 def display_log_counts(counts: dict):
-    print("Рівень логування | Кількість")
+    print("\nРівень логування | Кількість")
     print("-----------------|----------")
+
     for level, count in counts.items():
         print(f"{level:<16} | {count}")
 
@@ -55,7 +60,7 @@ def main():
     log_file_extension = Path(log_file_path).suffix
 
     if log_file_extension != '.log':
-        print("Має бути log файл (.log)")
+        print("Must be log file (.log)")
         sys.exit()
 
     logs = load_logs(log_file_path)
@@ -71,7 +76,6 @@ def main():
             print(f"\nДеталі логів для рівня '{level.upper()}':")
             for log in filtered_logs:
                 print(f"{log['date']} {log['time']} - {log['message']}")
-
 
 
 if __name__ == "__main__":
